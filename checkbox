@@ -1,0 +1,47 @@
+<?php
+$the_name = "myCheck";
+
+$count = '0';
+while($count <= '2') {
+	$count++;
+	if ($count == '1') {
+		$checked = 'checked'; 
+	} else {
+		$checked = '';
+	}
+	?>
+	<input type="checkbox" class="<?php echo $the_name; ?>" name="the_name" value="<?php echo $count; ?>" <?php echo $checked; ?> >
+	
+	<?php
+}
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<span class="cont" ></span>
+
+<script>
+function checkIt() {
+    var getArrVal = $(".myCheck:checked").map(function() {
+      return this.value;
+    }).get();
+    if (getArrVal.length) {
+      $('.cont').html(getArrVal.join(","));
+	
+	  var x=$(".cont").text();
+	  var variablename = $(".cont").val();
+
+
+    } else {
+      $('.cont').html("At least one value must be checked!");
+      $(this).prop("checked", true);
+      getArrVal=[$(this).val()];
+      return false; 
+    }
+    console.log(getArrVal);
+
+}
+$(function() {
+  $(".myCheck").on('click',checkIt);
+  checkIt();
+});
+</script>
